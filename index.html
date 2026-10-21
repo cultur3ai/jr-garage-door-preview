@@ -87,12 +87,16 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap hero__grid">
       <div class="hero__copy">
-        <h1 id="hero-title">When the door won&rsquo;t close, the day stops.</h1>
+        <h1 id="hero-title">
+          <span class="line"><span>When the door</span></span>
+          <span class="line"><span>won&rsquo;t close,</span></span>
+          <span class="line"><span>the day stops.</span></span>
+        </h1>
         <p class="hero__sub">Springs, rollers, openers and new doors &mdash; repaired and installed across Port St.&nbsp;Lucie, Stuart and the Treasure Coast.</p>
         <div class="hero__trust">
-          <span><strong>402</strong> Google reviews</span>
-          <span><strong>5.0</strong> average</span>
           <span><strong>Free</strong> estimates</span>
+          <span><strong>Repairs</strong> and new doors</span>
+          <span><strong>Two</strong> counties</span>
         </div>
         <div class="hero__cta">
           <a class="btn btn--solid btn--lg" href="tel:+17728773805">Call (772) 877-3805</a>
@@ -104,21 +108,39 @@
         <svg class="door" viewBox="0 0 520 460" role="presentation" focusable="false">
           <defs>
             <linearGradient id="panelGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#4A555F"/>
-              <stop offset="1" stop-color="#2A323B"/>
+              <stop offset="0" stop-color="#4A555F"/><stop offset="1" stop-color="#2A323B"/>
             </linearGradient>
-            <linearGradient id="interiorGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F26B21" stop-opacity=".22"/>
-              <stop offset=".55" stop-color="#8A3E12" stop-opacity=".14"/>
-              <stop offset="1" stop-color="#14181D" stop-opacity=".95"/>
+            <linearGradient id="wallGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#4A3221"/><stop offset=".5" stop-color="#8A542F"/><stop offset="1" stop-color="#B4703C"/>
             </linearGradient>
             <linearGradient id="floorGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#5A6169"/><stop offset="1" stop-color="#2A323B"/>
+              <stop offset="0" stop-color="#2A2F35"/><stop offset="1" stop-color="#14181D"/>
+            </linearGradient>
+            <radialGradient id="poolGrad" cx=".5" cy=".5" r=".5">
+              <stop offset="0" stop-color="#FFC48F" stop-opacity=".95"/>
+              <stop offset="1" stop-color="#F26B21" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="rayGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FFE6D2" stop-opacity=".7"/>
+              <stop offset="1" stop-color="#F26B21" stop-opacity="0"/>
             </linearGradient>
           </defs>
 
           <!-- the opening, with warm light inside it -->
-          <rect x="52" y="34" width="416" height="376" fill="url(#interiorGrad)"/>
+          <!-- what is inside the garage, revealed as the door rolls up -->
+          <g class="door__interior">
+            <rect x="52" y="34" width="416" height="376" fill="url(#wallGrad)"/>
+            <rect x="52" y="300" width="416" height="110" fill="url(#floorGrad)"/>
+            <ellipse cx="260" cy="392" rx="168" ry="30" fill="url(#poolGrad)"/>
+            <g opacity=".6">
+              <polygon points="176,40 246,40 214,300 164,300" fill="url(#rayGrad)"/>
+              <polygon points="300,40 366,40 352,300 302,300" fill="url(#rayGrad)"/>
+            </g>
+            <g stroke="#E8C9AF" stroke-opacity=".22" stroke-width="5" stroke-linecap="round">
+              <line x1="372" y1="150" x2="446" y2="150"/>
+              <line x1="372" y1="212" x2="446" y2="212"/>
+            </g>
+          </g>
           <!-- side tracks -->
           <rect x="38" y="34" width="14" height="376" rx="3" fill="#171C22" stroke="#C9CFD6" stroke-opacity=".18"/>
           <rect x="468" y="34" width="14" height="376" rx="3" fill="#171C22" stroke="#C9CFD6" stroke-opacity=".18"/>
@@ -155,53 +177,17 @@
           <rect x="24" y="410" width="472" height="12" rx="3" fill="url(#floorGrad)"/>
           <rect x="24" y="410" width="472" height="4" rx="2" fill="#F26B21" fill-opacity=".85" class="door__sill"/>
         </svg>
+        <div class="door-reveal" aria-hidden="true">
+          <span class="door-reveal__k">Broken door?</span>
+          <span class="door-reveal__tel">(772) 877-3805</span>
+          <span class="door-reveal__hint">Scroll &mdash; or just call.</span>
+        </div>
         <p class="hero__art-note">Port St. Lucie &middot; St. Lucie &amp; Martin counties</p>
       </div>
     </div>
   </section>
 
   <div class="hazard" aria-hidden="true"><div class="hazard__track"></div></div>
-
-  <section class="fix" id="what-we-fix" aria-labelledby="fix-title">
-    <div class="wrap">
-      <header class="section-head">
-        <p class="kicker" data-reveal>What we fix</p>
-        <h2 id="fix-title">Six things that go wrong, and what each one actually is.</h2>
-      </header>
-      <div class="fix__grid">
-        <article class="card" data-reveal>
-          <span class="card__num">01</span>
-          <h3>Broken spring</h3>
-          <p>The bang from the garage was the torsion spring letting go. The door is a dead weight now &mdash; don&rsquo;t force it.</p>
-        </article>
-        <article class="card" data-reveal>
-          <span class="card__num">02</span>
-          <h3>Opener runs, door doesn&rsquo;t move</h3>
-          <p>Motor spinning with nothing lifting usually means a stripped gear, a tired capacitor, or a spring no longer carrying the weight.</p>
-        </article>
-        <article class="card" data-reveal>
-          <span class="card__num">03</span>
-          <h3>Door off the track</h3>
-          <p>A bent track or a roller out of its channel has to be straightened before it chews the panels.</p>
-        </article>
-        <article class="card" data-reveal>
-          <span class="card__num">04</span>
-          <h3>Cables and rollers</h3>
-          <p>Frayed cables and flat-spotted rollers are how a small repair turns into a dropped door.</p>
-        </article>
-        <article class="card" data-reveal>
-          <span class="card__num">05</span>
-          <h3>New door installation</h3>
-          <p>Measured, supplied and fitted &mdash; plus the opener to match.</p>
-        </article>
-        <article class="card" data-reveal>
-          <span class="card__num">06</span>
-          <h3>Panels and hardware</h3>
-          <p>A dented section, a bent hinge, a handle that no longer latches.</p>
-        </article>
-      </div>
-    </div>
-  </section>
 
   <section class="numbers" aria-labelledby="numbers-title">
     <div class="wrap">
@@ -212,6 +198,47 @@
         <li data-reveal><span class="numbers__fig" data-count="2">2</span><span class="numbers__label">Counties served</span></li>
         <li data-reveal><span class="numbers__fig">$0</span><span class="numbers__label">Cost of an estimate</span></li>
       </ul>
+    </div>
+  </section>
+
+  <section class="fix" id="what-we-fix" aria-labelledby="fix-title">
+    <div class="wrap">
+      <header class="section-head">
+        <p class="kicker" data-reveal>What we fix</p>
+        <h2 id="fix-title">Six things that go wrong, and what each one actually is.</h2>
+      </header>
+      <div class="fix__grid">
+        <article class="card" data-reveal><div class="card__tilt">
+          <span class="card__num">01</span>
+          <h3>Broken spring</h3>
+          <p>The bang from the garage was the torsion spring letting go. The door is a dead weight now &mdash; don&rsquo;t force it.</p>
+        </div></article>
+        <article class="card" data-reveal><div class="card__tilt">
+          <span class="card__num">02</span>
+          <h3>Opener runs, door doesn&rsquo;t move</h3>
+          <p>Motor spinning with nothing lifting usually means a stripped gear, a tired capacitor, or a spring no longer carrying the weight.</p>
+        </div></article>
+        <article class="card" data-reveal><div class="card__tilt">
+          <span class="card__num">03</span>
+          <h3>Door off the track</h3>
+          <p>A bent track or a roller out of its channel has to be straightened before it chews the panels.</p>
+        </div></article>
+        <article class="card" data-reveal><div class="card__tilt">
+          <span class="card__num">04</span>
+          <h3>Cables and rollers</h3>
+          <p>Frayed cables and flat-spotted rollers are how a small repair turns into a dropped door.</p>
+        </div></article>
+        <article class="card" data-reveal><div class="card__tilt">
+          <span class="card__num">05</span>
+          <h3>New door installation</h3>
+          <p>Measured, supplied and fitted &mdash; plus the opener to match.</p>
+        </div></article>
+        <article class="card" data-reveal><div class="card__tilt">
+          <span class="card__num">06</span>
+          <h3>Panels and hardware</h3>
+          <p>A dented section, a bent hinge, a handle that no longer latches.</p>
+        </div></article>
+      </div>
     </div>
   </section>
 
