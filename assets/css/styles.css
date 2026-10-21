@@ -58,7 +58,7 @@ ul{margin:0;padding:0;list-style:none}
 .wordmark__name{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:.02em;text-transform:uppercase}
 .wordmark__sub{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);margin-top:.28rem}
 .header__actions{display:flex;align-items:center;gap:1rem}
-.header__tel{color:var(--paper);text-decoration:none;font-weight:600;font-variant-numeric:tabular-nums;font-size:1.02rem}
+.header__tel{color:var(--paper);text-decoration:none;font-weight:600;font-variant-numeric:tabular-nums;font-size:1.02rem;display:inline-flex;align-items:center;min-height:44px}
 .header__tel:hover{color:var(--orange)}
 
 .btn{
@@ -250,7 +250,7 @@ ul{margin:0;padding:0;list-style:none}
 
 
 /* ---------- CONTRAST: small text raised to AA on both grounds ---------- */
-.numbers__label{color:#B7C0C8}
+.numbers__label{color:#C6CED5;font-size:.82rem}
 .hero__art-note{color:#9AA5AF}
 .footer__note{color:#8C97A2}
 .contact__hours{color:#9AA5AF}
@@ -270,4 +270,106 @@ ul{margin:0;padding:0;list-style:none}
     transition:color .2s var(--ease)
   }
   .header__nav a:hover,.header__nav a:focus-visible{color:var(--orange)}
+}
+
+
+/* ============================================================
+   MOTION-LAYER — added 2026-10-21
+   Everything here is transform/opacity only, one easing curve,
+   and all of it dies under prefers-reduced-motion.
+   ============================================================ */
+
+/* --- scroll progress line at the foot of the sticky header --- */
+.site-header{position:sticky}
+.progress{position:absolute;left:0;right:0;bottom:-1px;height:3px;pointer-events:none}
+.progress__bar{
+  display:block;height:100%;width:100%;background:var(--orange);
+  transform:scaleX(0);transform-origin:0 50%;will-change:transform;
+}
+
+/* --- the header tightens once you leave the hero --- */
+.header__inner{transition:min-height .28s var(--ease)}
+.wordmark__name{transition:font-size .28s var(--ease)}
+.site-header.is-scrolled .header__inner{min-height:58px}
+.site-header.is-scrolled .wordmark__name{font-size:1.18rem}
+.site-header.is-scrolled{box-shadow:0 6px 18px rgba(0,0,0,.28)}
+
+/* --- the door drifts, and opens the rest of the way under the pointer --- */
+.hero__art .door{animation:door-float 7.5s ease-in-out infinite}
+@keyframes door-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.door__panels{transition:transform .9s var(--ease)}
+.door:hover .door__panels{transform:translateY(-152px)}
+.door__sill{transition:opacity .6s var(--ease)}
+.door:hover .door__sill{opacity:.35}
+
+/* --- kickers draw their rule as they arrive --- */
+.kicker{position:relative;padding-bottom:.55rem}
+.kicker::after{
+  content:"";position:absolute;left:0;bottom:0;width:38px;height:3px;background:var(--orange);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .55s var(--ease) .05s;
+}
+.js .kicker[data-reveal].is-in::after{transform:scaleX(1)}
+.js .kicker[data-reveal]:not(.is-in)::after{transition-duration:0s}
+
+/* --- cards arrive with a degree of lean, and catch light on hover --- */
+.js .card[data-reveal]{transform:translateY(18px) rotate(-1deg)}
+.js .card[data-reveal].is-in{transform:none}
+.card{overflow:hidden}
+.card::after{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(115deg,transparent 32%,rgba(242,107,33,.13) 46%,transparent 60%);
+  transform:translate3d(-130%,0,0);transition:transform .65s var(--ease);
+}
+.card:hover::after,.card:focus-within::after{transform:translate3d(130%,0,0)}
+.card__num{transition:letter-spacing .3s var(--ease),color .3s var(--ease)}
+.card:hover .card__num{letter-spacing:.24em;color:#FF7E38}
+
+/* --- the numbers settle with a small pop --- */
+.numbers__fig{transition:transform .3s var(--ease)}
+.numbers li.is-counted .numbers__fig{animation:fig-pop .45s var(--ease)}
+@keyframes fig-pop{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
+
+/* --- the town strip: a slow typographic marquee --- */
+.towns{
+  background:var(--steel);border-top:1px solid rgba(201,207,214,.16);
+  border-bottom:1px solid rgba(0,0,0,.25);overflow:hidden;padding:.85rem 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+}
+.towns:hover .towns__track{animation-play-state:paused}
+.towns__track{
+  display:flex;align-items:center;gap:2.4rem;width:max-content;
+  animation:towns-slide 38s linear infinite;will-change:transform;
+}
+.towns__track span{
+  font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1.02rem;
+  letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;color:#D8DEE4;
+}
+.towns__track .dot{color:var(--orange);letter-spacing:0}
+@keyframes towns-slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+
+/* --- FAQ answers slide in when a row opens --- */
+.faq__item[open] p{animation:faq-in .3s var(--ease) both}
+@keyframes faq-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+
+/* --- the phone number sends out a slow ring --- */
+.contact__tel{position:relative}
+.contact__tel::after{
+  content:"";position:absolute;inset:-12px -6px;border-radius:14px;
+  border:2px solid rgba(242,107,33,.55);opacity:0;pointer-events:none;
+  animation:tel-ring 3.6s var(--ease) infinite;
+}
+@keyframes tel-ring{
+  0%{opacity:.5;transform:scale(.97)}
+  62%{opacity:0;transform:scale(1.05)}
+  100%{opacity:0;transform:scale(1.05)}
+}
+
+/* --- everything above stops here --- */
+@media (prefers-reduced-motion:reduce){
+  .hero__art .door,.towns__track,.contact__tel::after,.numbers li.is-counted .numbers__fig{animation:none !important}
+  .door:hover .door__panels{transform:translateY(-26px)}
+  .card::after{display:none}
+  .js .card[data-reveal]{transform:none}
+  .js .kicker[data-reveal]::after{transform:scaleX(1)}
 }

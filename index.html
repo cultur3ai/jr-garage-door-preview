@@ -64,6 +64,7 @@
 <div class="preview-strip">Preview build for JR Garage Door Service LLC · prepared 21 October 2026 by Libertas AI Solutions</div>
 
 <header class="site-header" id="top">
+  <div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
   <div class="wrap header__inner">
     <a class="wordmark" href="#top">
       <span class="wordmark__name">JR Garage Door</span>
@@ -164,7 +165,7 @@
   <section class="fix" id="what-we-fix" aria-labelledby="fix-title">
     <div class="wrap">
       <header class="section-head">
-        <p class="kicker">What we fix</p>
+        <p class="kicker" data-reveal>What we fix</p>
         <h2 id="fix-title">Six things that go wrong, and what each one actually is.</h2>
       </header>
       <div class="fix__grid">
@@ -216,7 +217,7 @@
 
   <section class="area" aria-labelledby="area-title">
     <div class="wrap">
-      <p class="kicker">Where we work</p>
+      <p class="kicker" data-reveal>Where we work</p>
       <h2 id="area-title" class="area__title">Port St. Lucie <span>&middot;</span> Fort Pierce <span>&middot;</span> Jensen Beach <span>&middot;</span> Stuart</h2>
       <p class="area__sub">And across St.&nbsp;Lucie and Martin counties.</p>
     </div>
@@ -225,7 +226,7 @@
   <section class="faq" aria-labelledby="faq-title">
     <div class="wrap faq__wrap">
       <header class="section-head">
-        <p class="kicker">Straight answers</p>
+        <p class="kicker" data-reveal>Straight answers</p>
         <h2 id="faq-title">The questions we get on the phone.</h2>
       </header>
       <div class="faq__list">
@@ -253,9 +254,13 @@
     </div>
   </section>
 
+  <div class="towns" aria-hidden="true">
+    <div class="towns__track"><span>Port St. Lucie</span><span class="dot" aria-hidden="true">&middot;</span><span>Fort Pierce</span><span class="dot" aria-hidden="true">&middot;</span><span>Jensen Beach</span><span class="dot" aria-hidden="true">&middot;</span><span>Stuart</span><span class="dot" aria-hidden="true">&middot;</span><span>St. Lucie County</span><span class="dot" aria-hidden="true">&middot;</span><span>Martin County</span><span class="dot" aria-hidden="true">&middot;</span><span>Treasure Coast</span><span class="dot" aria-hidden="true">&middot;</span><span>Port St. Lucie</span><span class="dot" aria-hidden="true">&middot;</span><span>Fort Pierce</span><span class="dot" aria-hidden="true">&middot;</span><span>Jensen Beach</span><span class="dot" aria-hidden="true">&middot;</span><span>Stuart</span><span class="dot" aria-hidden="true">&middot;</span><span>St. Lucie County</span><span class="dot" aria-hidden="true">&middot;</span><span>Martin County</span><span class="dot" aria-hidden="true">&middot;</span><span>Treasure Coast</span><span class="dot" aria-hidden="true">&middot;</span></div>
+  </div>
+
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="wrap contact__wrap">
-      <p class="kicker kicker--light">Call us</p>
+      <p class="kicker kicker--light" data-reveal>Call us</p>
       <h2 id="contact-title" class="contact__title">Tell us what the door is doing.</h2>
       <a class="contact__tel" href="tel:+17728773805">(772) 877-3805</a>
       <p class="contact__row"><a href="mailto:jrgaragedoorservyce@gmail.com">jrgaragedoorservyce@gmail.com</a></p>
@@ -281,5 +286,6 @@
 
 <script src="assets/js/reveal.js" defer></script>
 <script src="assets/js/door.js" defer></script>
+<script src="assets/js/motion.js" defer></script>
 </body>
 </html>
