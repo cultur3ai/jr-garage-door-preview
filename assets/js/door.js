@@ -13,7 +13,7 @@
   if (!panels.length) return;
 
   if (REDUCED) {
-    panels.forEach(function (p) { p.style.opacity = '1'; p.style.transform = 'none'; });
+    panels.forEach(function (p) { p.style.opacity = '1'; p.style.transform = ''; });
     return;
   }
 
@@ -27,7 +27,7 @@
   function reveal() {
     if (done) return;
     done = true;
-    panels.forEach(function (p) { p.style.opacity = '1'; p.style.transform = 'none'; });
+    panels.forEach(function (p) { p.style.opacity = '1'; p.style.transform = ''; p.style.transition = ''; });
   }
 
   if ('IntersectionObserver' in window) {

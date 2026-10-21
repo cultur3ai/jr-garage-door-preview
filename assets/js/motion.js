@@ -29,7 +29,7 @@
       bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
     }
 
-    if (art && hero) {
+    if (art && hero && document.documentElement.dataset.scene !== 'running') {
       var travel = Math.max(hero.offsetHeight * 0.95, 1);
       var open = Math.min(Math.max(y / travel, 0), 1);
       art.style.setProperty('--door-open', open.toFixed(3));

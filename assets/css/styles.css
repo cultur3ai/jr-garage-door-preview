@@ -405,16 +405,16 @@ ul{margin:0;padding:0;list-style:none}
   display:flex;flex-direction:column;align-items:center;gap:.4rem;text-align:center;
   padding:1.1rem 1.4rem;border-radius:6px;
   background:radial-gradient(120% 120% at 50% 40%,rgba(10,13,16,.72),rgba(10,13,16,.28) 70%,transparent);
-  opacity:calc(var(--door-open) * 1.2);pointer-events:none;
+  opacity:clamp(0,calc((var(--door-open) - 0.6) * 2.5),1);pointer-events:none;
   scale:calc(.88 + var(--door-open) * .12);
   transition:opacity .12s linear,scale .12s linear;
 }
 .door-reveal__k{
   font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:.78rem;
-  letter-spacing:.24em;text-transform:uppercase;color:#FFD9BF;
+  letter-spacing:.24em;text-transform:uppercase;color:#FFE3CB;
 }
-.door-reveal__tel{
-  font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.6rem);
+.door-reveal__tel{white-space:nowrap;
+  font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:clamp(1.15rem,2.4vw,2rem);
   letter-spacing:.01em;color:#fff;line-height:1;
   text-shadow:0 2px 10px rgba(0,0,0,.85),0 0 26px rgba(242,107,33,.75);
 }
@@ -457,3 +457,92 @@ ul{margin:0;padding:0;list-style:none}
   .card::before{display:none}
   .odo__strip{transition:none !important}
 }
+
+
+/* ============================================================
+   SCENE — the hero plays a short story: the spring snaps, the door
+   jams, a van pulls up, the fix goes in, and the door finally rolls
+   clean. Every state is a class on the <svg class="scene">, so the
+   whole thing is CSS transitions driven by one JS timeline.
+   ============================================================ */
+
+.scene .van{
+  opacity:0;
+  transform:translate3d(-380px,0,0);
+  transition:transform 1.05s cubic-bezier(.22,1,.36,1),opacity .3s linear;
+}
+.scene .mechanic{
+  opacity:0;
+  transform:translate3d(196px,0,0);
+  transition:transform .95s cubic-bezier(.22,1,.36,1),opacity .35s linear;
+}
+.scene .mechanic__arm{transform-origin:18px -190px;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.scene .sparks{opacity:0;transform-origin:206px 92px}
+
+/* the van arrives and parks clear of the opening */
+.scene--arrive .van{opacity:1;transform:translate3d(-58px,0,0)}
+
+/* the mechanic walks to the door and reaches for the spring */
+.scene--mechanic .mechanic{opacity:1;transform:translate3d(214px,0,0)}
+.scene--fix .mechanic__arm{transform:rotate(-18deg)}
+.scene--fix .sparks{opacity:1;animation:spark-burst .5s steps(3,end) 2}
+@keyframes spark-burst{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+
+/* the snap itself: spark, shudder, and the bottom panel drops out of line */
+.scene--snap .sparks{opacity:1;animation:spark-burst .55s steps(4,end) 2}
+@keyframes spark-burst-big{0%{opacity:0;transform:scale(.6)}40%{opacity:1;transform:scale(1.15)}100%{opacity:0;transform:scale(.9)}}
+.scene--snap .sparks{animation-name:spark-burst-big}
+.scene--snap .door__panels{animation:door-shudder .55s cubic-bezier(.36,.07,.19,.97)}
+@keyframes door-shudder{
+  0%,100%{transform:translate3d(calc(var(--door-open,0) * -322px),0,0)}
+  20%{transform:translate3d(calc(var(--door-open,0) * -322px + 3px),2px,0) rotate(.25deg)}
+  45%{transform:translate3d(calc(var(--door-open,0) * -322px - 3px),-2px,0) rotate(-.25deg)}
+  70%{transform:translate3d(calc(var(--door-open,0) * -322px + 2px),1px,0) rotate(.12deg)}
+}
+.scene--snap .panel--loose,
+.scene--jam .panel--loose{
+  transform:translate(12px,28px) rotate(4.5deg);
+  transition:transform .5s cubic-bezier(.36,.07,.19,.97);
+}
+.scene--jam .door__panels{transform:translate3d(0,calc(var(--door-open,0) * -322px),0) rotate(2.4deg)}
+.scene--snap .door__panels{transform:translate3d(0,calc(var(--door-open,0) * -322px),0) rotate(1.4deg)}
+.scene--fix .panel--loose{transform:none;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+
+/* the spring the mechanic is working on glows while it is being fixed */
+.scene--fix .door__spring line{stroke:#FFC48F}
+.scene--done .door__spring line{stroke:#F26B21}
+
+/* the van pulls away at the end */
+.scene--leave .van{opacity:0;transform:translate3d(300px,0,0);transition:transform 1s cubic-bezier(.55,0,.9,.4),opacity .5s .45s linear}
+.scene--leave .mechanic{opacity:0;transform:translate3d(236px,0,0);transition:transform .7s ease-in,opacity .4s linear}
+
+@media (prefers-reduced-motion:reduce){
+  .scene .van{display:none}
+  .scene .mechanic{display:none}
+  .scene .sparks{display:none}
+  .scene--snap .door__panels{animation:none}
+  .scene--snap .panel--loose,.scene--jam .panel--loose{transform:none}
+  .hero h1 .line > span{animation:none !important;transform:none !important}
+}
+
+
+/* ---------- BROKEN-STATE: the damage has to be unmistakable ---------- */
+.door__cable{opacity:0;transition:opacity .4s linear}
+.scene--snap .door__cable,.scene--jam .door__cable{opacity:1}
+.scene--fix .door__cable{opacity:0;transition:opacity .5s .3s linear}
+
+/* the top half of the door lets go and rides up, leaving a gap you can see through */
+.scene--snap .p1,.scene--snap .p2{transform:translate3d(0,-24px,0) rotate(1.2deg);transition:transform .45s cubic-bezier(.36,.07,.19,.97)}
+.scene--jam .p1,.scene--jam .p2{transform:translate3d(0,-52px,0) rotate(2.4deg);transition:transform .6s cubic-bezier(.36,.07,.19,.97)}
+.scene--jam .p3{transform:translate3d(0,4px,0);transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.scene--fix .p1,.scene--fix .p2,.scene--fix .p3{transform:none;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+
+/* the jam also bows the tracks, which is what a real off-track door looks like */
+.scene--jam .facade{filter:none}
+
+
+/* the van's headlights sweep across the broken door when it pulls in */
+.scene .beams{opacity:0;transition:opacity .5s linear .35s}
+.scene--arrive .beams,.scene--mechanic .beams,.scene--fix .beams{opacity:.85}
+.scene--leave .beams{opacity:0;transition:opacity .4s linear}
+@media (prefers-reduced-motion:reduce){.scene .beams{display:none}}
