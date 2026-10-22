@@ -245,18 +245,29 @@
                a stylised figure, no face, orange work shirt -->
           <g class="mechanic" aria-hidden="true">
             <g transform="translate(0,420)"><g transform="scale(0.8)">
-              <path d="M-15 -152 L15 -152 L22 -58 L-22 -58 Z" fill="#0F1418"/>
-              <circle cx="0" cy="-178" r="21" fill="#0F1418"/>
-              <path d="M-22 -192 A22 22 0 0 1 22 -192 L22 -184 L-22 -184 Z" fill="#F26B21"/>
-              <rect x="-21" y="-60" width="17" height="60" rx="4" fill="#0F1418"/>
-              <rect x="4" y="-60" width="17" height="60" rx="4" fill="#0F1418"/>
+              <!-- neck, so the head is not sitting straight on the shoulders -->
+              <rect x="-7" y="-164" width="14" height="14" fill="#0F1418"/>
+              <!-- torso with shoulders -->
+              <path d="M-19 -152 L19 -152 L23 -58 L-23 -58 Z" fill="#0F1418"/>
+              <!-- hard hat -->
+              <circle cx="0" cy="-180" r="21" fill="#0F1418"/>
+              <path d="M-23 -192 A23 23 0 0 1 23 -192 L23 -184 L-23 -184 Z" fill="#F26B21"/>
+              <rect x="-27" y="-186" width="54" height="5" rx="2.5" fill="#F26B21"/>
+              <!-- the arm that hangs -->
+              <path d="M-19 -148 L-27 -104 L-17 -102 L-9 -146 Z" fill="#0F1418"/>
+              <!-- the arm that works: shoulder joint sits below the neck -->
               <g class="mechanic__arm">
-                <rect x="18" y="-198" width="32" height="10" rx="5" fill="#0F1418"/>
+                <rect x="14" y="-145" width="44" height="11" rx="5.5" fill="#0F1418" stroke="#39414A" stroke-width="1"/>
                 <g class="mechanic__wrench">
-                  <rect x="52" y="-199" width="20" height="6" rx="3" fill="#C9CFD6"/>
-                  <circle cx="74" cy="-196" r="6" fill="none" stroke="#C9CFD6" stroke-width="4"/>
+                  <rect x="52" y="-150" width="22" height="6" rx="3" fill="#C9CFD6"/>
+                  <circle cx="76" cy="-147" r="6.5" fill="none" stroke="#C9CFD6" stroke-width="4"/>
                 </g>
               </g>
+              <!-- legs -->
+              <rect x="-19" y="-60" width="15" height="60" rx="4" fill="#0F1418"/>
+              <rect x="4" y="-60" width="15" height="60" rx="4" fill="#0F1418"/>
+            </g></g>
+          </g>
             </g>
           </g>
             </g></g>

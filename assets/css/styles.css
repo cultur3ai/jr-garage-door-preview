@@ -476,7 +476,6 @@ ul{margin:0;padding:0;list-style:none}
   transform:translate3d(196px,0,0);
   transition:transform .95s cubic-bezier(.22,1,.36,1),opacity .35s linear;
 }
-.scene .mechanic__arm{transform-origin:18px -190px;transition:transform .5s cubic-bezier(.22,1,.36,1)}
 .scene .sparks{opacity:0;transform-origin:206px 92px}
 
 /* the van arrives and parks clear of the opening */
@@ -484,7 +483,6 @@ ul{margin:0;padding:0;list-style:none}
 
 /* the mechanic walks to the door and reaches for the spring */
 .scene--mechanic .mechanic{opacity:1;transform:translate3d(214px,0,0)}
-.scene--fix .mechanic__arm{transform:rotate(-18deg)}
 .scene--fix .sparks{opacity:1;animation:spark-burst .5s steps(3,end) 2}
 @keyframes spark-burst{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
 
@@ -546,3 +544,15 @@ ul{margin:0;padding:0;list-style:none}
 .scene--arrive .beams,.scene--mechanic .beams,.scene--fix .beams{opacity:.85}
 .scene--leave .beams{opacity:0;transition:opacity .4s linear}
 @media (prefers-reduced-motion:reduce){.scene .beams{display:none}}
+
+
+/* ---------- ARM: one drawn arm, rotated about its own shoulder end.
+   transform-box: fill-box makes the origin the arm's own box, so the pivot is
+   the shoulder and not the SVG origin — the bug that had the arm leaving his head. */
+.scene .mechanic__arm{
+  transform-box: fill-box;
+  transform-origin: 0% 60%;
+  transform: rotate(0deg);
+  transition: transform .5s cubic-bezier(.22,1,.36,1);
+}
+.scene--fix .mechanic__arm{transform:rotate(-52deg)}
